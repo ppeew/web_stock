@@ -13,16 +13,9 @@ var DB *gorm.DB
 
 type User struct {
 	gorm.Model
-	Name        string
-	Passwd      string
-	UserStockID int
-	UserStock   UserStock
-}
-
-// belongs to
-type UserStock struct {
-	ID        int
-	StockCode int
+	Name   string
+	Passwd string
+	Email  string
 }
 
 func init() {
@@ -34,7 +27,7 @@ func init() {
 		return
 	}
 	DB = d
-	err2 := DB.AutoMigrate(&User{}, &UserStock{})
+	err2 := DB.AutoMigrate(&User{})
 	if err2 == nil {
 		fmt.Println("添加成功")
 	}
